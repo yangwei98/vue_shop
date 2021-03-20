@@ -440,7 +440,7 @@ export default {
       // 如果用户取消删除，返回字符串为cancel
       // console.log(confirmResult)
       if (confirmResult !== 'confirm') {
-        return this.$message.info('已经取消删除')
+        return this.$message.info('已取消')
       }
 
       const { data: res } = await this.$http.delete('users/' + id)
