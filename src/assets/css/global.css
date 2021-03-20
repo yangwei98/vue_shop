@@ -28,3 +28,8 @@ html, body, #app{
 .el-cascader-menu {
     height: 300px;
 }
+
+.el-input{
+    width: 100%;
+}
+
