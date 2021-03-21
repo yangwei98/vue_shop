@@ -47,13 +47,14 @@
             {{ scope.row.add_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="130px">
+        <el-table-column label="删除" width="65px">
           <template slot-scope="scope">
-            <el-button
+            <!-- <el-button
               type="primary"
               icon="el-icon-edit"
               size="mini"
-            ></el-button>
+              @click="goEditPage(scope.row.goods_id)"
+            ></el-button> -->
             <el-button
               type="danger"
               icon="el-icon-delete"
@@ -143,6 +144,11 @@ export default {
     goAddpage(){
         this.$router.push('/goods/add')
     }
+    /* goEditPage(id){
+      sessionStorage.setItem('当前要编辑的商品id',id)
+      // console.log(sessionStorage)
+      this.$router.push('/goods/edit')
+    } */
   }
 }
 </script>

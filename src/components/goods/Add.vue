@@ -207,14 +207,14 @@ export default {
         return this.$message.error('获取商品分类数据失败！')
       }
       this.catelist = res.data
-      console.log(this.catelist)
+      // console.log(this.catelist)
     },
     // 级联选择器选择项变化触发
     handleChange() {
       if (this.addForm.goods_cat.length !== 3) {
         this.addForm.goods_cat = []
       }
-      console.log(this.addForm.goods_cat)
+      // console.log(this.addForm.goods_cat)
     },
     beforeTabLeave(activeName, oldActiveName) {
       // console.log('即将离开的标签页名字是'+ oldActiveName)
@@ -247,7 +247,7 @@ export default {
             item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
         })
         this.manyTableData = res.data
-        console.log(this.manyTableData)
+        // console.log(this.manyTableData)
       } else if (this.activeIndex === '2') {
         const { data: res } = await this.$http.get(
           `categories/${this.cateId}/attributes`,
@@ -266,7 +266,7 @@ export default {
     },
     // picture yulan
     handlePreview(file) {
-      console.log(file)
+      // console.log(file)
       this.previewPath = file.response.data.url
       this.previewDialogVisible = true
     },
@@ -278,7 +278,7 @@ export default {
       const i = this.addForm.pics.findIndex((x) => x.pic === filePath)
       // 调用数组splice方法
       this.addForm.pics.splice(i, 1)
-      console.log(this.addForm)
+      // console.log(this.addForm)
     },
     // on upload success
     handleSuccess(response) {
@@ -286,7 +286,7 @@ export default {
       // 1.拼接 2.push到addForm的pics数组
       const picInfo = { pic: response.data.tmp_path }
       this.addForm.pics.push(picInfo)
-      console.log(this.addForm)
+      // console.log(this.addForm)
     },
     // 添加商品
     add() {
@@ -319,12 +319,12 @@ export default {
         // console.log(this.manyTableData)
         // console.log(this.onlyTableData)
         form.attrs = this.addForm.attrs
-        console.log(form)
+        // console.log(form)
         //发起请求添加商品
         //商品的名称必须唯一
         const {data:res } = await this.$http.post('goods',form)
         if(res.meta.status !== 201 ){
-          console.log(res)
+          // console.log(res)
           return this.$message.error('添加商品失败！')
           
         }

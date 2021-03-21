@@ -38,7 +38,7 @@ const router = new Router({
         { path: '/categories', component: Cate},
         { path: '/params', component: Params},
         { path: '/goods', component: GoodsList},
-        { path: '/goods/add', component: Add}
+        { path: '/goods/add', component: Add},
       ]
     }
   ]
