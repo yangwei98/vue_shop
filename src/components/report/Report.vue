@@ -17,13 +17,13 @@
 <script>
 // 导入echarts图标
 import * as echarts from 'echarts'
-//导入深拷贝
+// 导入深拷贝
 import _ from 'lodash'
 
 export default {
   data() {
     return {
-        //后端提供的需要合并的数据
+      // 后端提供的需要合并的数据
       options: {
         title: {
           text: '用户来源'
@@ -67,7 +67,7 @@ export default {
       return this.$message.error('获取折现图数据失败！')
     }
     // 指定图表的配置项和数据
-    const result = _.merge(res.data,this.options)
+    const result = _.merge(res.data, this.options)
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(result)

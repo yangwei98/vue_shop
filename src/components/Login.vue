@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
@@ -66,11 +66,11 @@ export default {
   },
   methods: {
     // 点击充值按钮充值登录表单
-    resetLoginForm () {
+    resetLoginForm() {
       // console.log(this);
       this.$refs.loginFormRef.resetFields() // loginFormRef为上面自定义的表单引用对象
     },
-    login () {
+    login() {
       this.$refs.loginFormRef.validate(async (valid) => {
         // validate为Boolean值，验证是否通过   ((valid) => )只有一个形参可以去括号
         // console.log(valid)

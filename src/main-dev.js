@@ -15,16 +15,29 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+//导入NProgress包对应的js和css
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 import axios from 'axios'
 //配置请求的根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+
+//在request拦截器中，展示进度条 NProgress.start()
 //挂载之前设置一个token拦截器
 axios.interceptors.request.use(config => {  //config为请求对象
+  NProgress.start()
   // console.log(config)
   config.headers.Authorization = window.sessionStorage.getItem('token')
   //在最后必须return config
   return config
 })
+//在response拦截器中，隐藏进度条 Nprogress.done()
+axios.interceptors.response.use(config => {
+  NProgress.done()
+  return config
+})
+
 //原型链中的$http
 Vue.prototype.$http = axios
 
@@ -34,7 +47,7 @@ Vue.component('tree-table', TreeTable)
 //将富文本编辑器注册为全局可用的组件
 Vue.use(VueQuillEditor)
 //全局过滤器 时间
-Vue.filter('dateFormat',function(originVal){
+Vue.filter('dateFormat', function (originVal) {
   const dt = new Date(originVal)
   const y = dt.getFullYear()
   const m = (dt.getMonth() + 1 + '').padStart(2, '0')  //两位数，不足加0

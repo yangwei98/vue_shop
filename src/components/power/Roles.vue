@@ -57,7 +57,7 @@
                   <el-col :span="18">
                     <el-tag
                       type="warning"
-                      v-for="(item3, i3) in item2.children"
+                      v-for="item3 in item2.children"
                       :key="item3.id"
                       closable
                       @close="removeRightById(scope.row, item3.id)"
@@ -174,9 +174,7 @@
       ></el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRightDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="allotRights"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="allotRights">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -218,9 +216,9 @@ export default {
         children: 'children'
       },
       // 选中的checkbox的id
-      defKeys:[],
-      //当前即将分配权限的角色id
-      roleId:''
+      defKeys: [],
+      // 当前即将分配权限的角色id
+      roleId: ''
     }
   },
   created() {
@@ -279,7 +277,7 @@ export default {
           'roles/' + this.editForm.roleId,
           this.editForm
         )
-        if (res.meta.status != 200) {
+        if (res.meta.status !== 200) {
           return this.$message.error('修改角色失败！')
         }
         this.editDialogVisible = !this.editDialogVisible
@@ -310,9 +308,7 @@ export default {
         return this.$message.info('已经取消删除')
       }
 
-      const { data: res } = await this.$http.delete(
-        'roles/' + id
-      )
+      const { data: res } = await this.$http.delete('roles/' + id)
       // console.log(this.editForm.roleId)
       if (res.meta.status !== 200) {
         return this.$message.error('删除角色失败')
@@ -371,28 +367,31 @@ export default {
       // 递归
       node.children.forEach((item) => this.getLeafKeys(item, arr))
     },
-    //监听分配权限的关闭对话框
-    setRightDialogClosed(){
-        this.defKeys = []
-      },
-      //点击为角色分配权限
-      async allotRights(){
-        const keys = [
-          //展开运算符放到数组中
-          ...this.$refs.treeRef.getCheckedKeys(),
-          ...this.$refs.treeRef.getHalfCheckedKeys()
-        ]
-        // console.log(keys)
-        const idStr = keys.join(',')
-        const {data:res} = await this.$http.post(`roles/${this.roleId}/rights`,{rids:idStr})
-        // console.log({rids:idStr})
-        if(res.meta.status !== 200){
-          return this.$message.error('分配权限失败')
-          }
-          this.$message.success('分配权限成功')
-          this.getRolesList()
-          this.setRightDialogVisible = false
+    // 监听分配权限的关闭对话框
+    setRightDialogClosed() {
+      this.defKeys = []
+    },
+    // 点击为角色分配权限
+    async allotRights() {
+      const keys = [
+        // 展开运算符放到数组中
+        ...this.$refs.treeRef.getCheckedKeys(),
+        ...this.$refs.treeRef.getHalfCheckedKeys()
+      ]
+      // console.log(keys)
+      const idStr = keys.join(',')
+      const { data: res } = await this.$http.post(
+        `roles/${this.roleId}/rights`,
+        { rids: idStr }
+      )
+      // console.log({rids:idStr})
+      if (res.meta.status !== 200) {
+        return this.$message.error('分配权限失败')
       }
+      this.$message.success('分配权限成功')
+      this.getRolesList()
+      this.setRightDialogVisible = false
+    }
   }
 }
 </script>

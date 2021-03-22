@@ -49,7 +49,7 @@
                   v-for="(item, i) in scope.row.attr_vals"
                   :key="i"
                   closable
-                  @close="handleClose(i,scope.row)"
+                  @close="handleClose(i, scope.row)"
                 >
                   {{ item }}
                 </el-tag>
@@ -119,7 +119,7 @@
                   v-for="(item, i) in scope.row.attr_vals"
                   :key="i"
                   closable
-                  @close="handleClose(i,scope.row)"
+                  @close="handleClose(i, scope.row)"
                 >
                   {{ item }}
                 </el-tag>
@@ -273,7 +273,7 @@ export default {
     async getCateList() {
       const { data: res } = await this.$http.get('categories')
       if (res.meta.status !== 200) {
-        return this.$message.error('获取商品分类失败')
+        return this.$message.error('获取参数列表失败!')
       }
       this.catelist = res.data
       //   console.log(this.catelist)
@@ -310,13 +310,13 @@ export default {
         }
       )
       if (res.meta.status !== 200) {
-        return this.$message.error('获取参数列表失败!')
+        return this.$message.info('请先选择商品分类!')
       }
       res.data.forEach((item) => {
         item.attr_vals = item.attr_vals ? item.attr_vals.split(' ') : []
-        //控制文本款的显示与隐藏
+        // 控制文本款的显示与隐藏
         item.inputVisible = false
-        //文本款中输入的值
+        // 文本款中输入的值
         item.inputValue = ''
       })
       console.log(res.data)
@@ -413,48 +413,50 @@ export default {
       this.$message.success('删除参数成功！')
       this.getParamsData()
     },
-    //文本框失去焦点或摁下enter键都会触发
-    async handleInputConfirm(row){
-        // console.log('ok')
-        if(row.inputValue.trim().length === 0){
-            row.inputValue = ''
-            row.inputVisible = false
-            return
-        }
-        //如果没有return，则输入的内容无需后续处理
-        row.attr_vals.push(row.inputValue.trim())
+    // 文本框失去焦点或摁下enter键都会触发
+    async handleInputConfirm(row) {
+      // console.log('ok')
+      if (row.inputValue.trim().length === 0) {
         row.inputValue = ''
         row.inputVisible = false
-        //需要发起请求保存这次操作
-        this.saveAttrVals(row)
+        return
+      }
+      // 如果没有return，则输入的内容无需后续处理
+      row.attr_vals.push(row.inputValue.trim())
+      row.inputValue = ''
+      row.inputVisible = false
+      // 需要发起请求保存这次操作
+      this.saveAttrVals(row)
     },
-    //将对attr_vals的操作保存到数据库
-    async saveAttrVals(row){
-        //需要发起请求保存这次操作
-        const {data:res} = await this.$http.put(`categories/${this.cateId}/attributes/${row.attr_id}`,
+    // 将对attr_vals的操作保存到数据库
+    async saveAttrVals(row) {
+      // 需要发起请求保存这次操作
+      const { data: res } = await this.$http.put(
+        `categories/${this.cateId}/attributes/${row.attr_id}`,
         {
-            attr_name:row.attr_name,
-            attr_sel:row.attr_sel,
-            attr_vals:row.attr_vals.join(' ')
-        })
-        if(res.meta.status!==200){
-            return this.$message.error('修改参数项失败！')
+          attr_name: row.attr_name,
+          attr_sel: row.attr_sel,
+          attr_vals: row.attr_vals.join(' ')
         }
-        this.$message.success('修改参数项成功！')
+      )
+      if (res.meta.status !== 200) {
+        return this.$message.error('修改参数项失败！')
+      }
+      this.$message.success('修改参数项成功！')
     },
-    //点击按钮展示文本输入框
-    showInput(row){
-        row.inputVisible = true
-        //让文本框自动获得焦点
-        //$nextTick方法的作用  就是当页面上元素被重新渲染之后，才会指定回调函数中的代码
-         this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
+    // 点击按钮展示文本输入框
+    showInput(row) {
+      row.inputVisible = true
+      // 让文本框自动获得焦点
+      // $nextTick方法的作用  就是当页面上元素被重新渲染之后，才会指定回调函数中的代码
+      this.$nextTick((_) => {
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
     },
-    //删除对应的参数可选项
-    handleClose(i,row){
-         row.attr_vals.splice(i, 1)
-         this.saveAttrVals(row)
+    // 删除对应的参数可选项
+    handleClose(i, row) {
+      row.attr_vals.splice(i, 1)
+      this.saveAttrVals(row)
     }
   },
   computed: {
@@ -492,7 +494,7 @@ export default {
 .el-tag {
   margin-right: 10px;
 }
-.input-new-tag{
-    width:120px
+.input-new-tag {
+  width: 120px;
 }
 </style>

@@ -40,14 +40,14 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" width="70px">
-          <template slot-scope="scope" >
+          <template slot-scope="scope">
             <el-button
               type="primary"
               icon="el-icon-edit"
               size="mini"
               @click="showBox(scope.row.order_id)"
             ></el-button>
-           <!--  <el-button
+            <!--  <el-button
               type="success"
               icon="el-icon-location"
               size="mini"

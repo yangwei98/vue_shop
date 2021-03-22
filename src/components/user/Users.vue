@@ -467,9 +467,11 @@ export default {
       if (!this.selectedRoleId) {
         return this.$message.error('请选择要分配的角色')
       }
-      const {data: res} = await this.$http.put(`users/${this.userInfo.id}/role`, 
-       {rid: this.selectedRoleId}
-      )
+      const {
+        data: res
+      } = await this.$http.put(`users/${this.userInfo.id}/role`, {
+        rid: this.selectedRoleId
+      })
       // console.log(res)
       if (res.meta.status !== 200) {
         return this.$message.error('更新角色失败！')
@@ -478,8 +480,8 @@ export default {
       this.getUserList()
       this.setRoleDialogVisible = false
     },
-    //监听分配角色对话框的关闭事件
-    setRoleDialogClosed(){
+    // 监听分配角色对话框的关闭事件
+    setRoleDialogClosed() {
       this.selectedRoleId = ''
       this.userInfo = ''
     }
