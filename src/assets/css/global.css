@@ -43,3 +43,7 @@ html, body, #app{
 .ql-editor{
     min-height: 300px;
 }
+
+.el-form-item__content{
+    text-align: left;
+}
