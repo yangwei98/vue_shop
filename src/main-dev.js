@@ -21,7 +21,7 @@ import 'nprogress/nprogress.css'
 
 import axios from 'axios'
 //配置请求的根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://121.5.194.144:8888/api/private/v1/'
 
 //在request拦截器中，展示进度条 NProgress.start()
 //挂载之前设置一个token拦截器

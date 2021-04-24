@@ -37,6 +37,50 @@
         </el-form-item>
       </el-form>
     </div>
+    <div class="footer">
+      <div class="bottom">
+        <div class="gonan">
+          <div style="width: 260px; margin: 0 auto; padding: 20px 0">
+            <a
+              target="_blank"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602009097"
+              style="
+                display: inline-block;
+                text-decoration: none;
+                height: 20px;
+                line-height: 20px;
+              "
+              ><img src="../../public/备案图标.png" style="float: left" />
+              <p
+                style="
+                  float: left;
+                  height: 20px;
+                  line-height: 20px;
+                  margin: 0px 0px 0px 5px;
+                  color: #939393;
+                "
+              >
+                粤公网安备 44010602009097号
+              </p></a
+            >
+          </div>
+        </div>
+        <div class="icp">
+          <a
+            href="https://beian.miit.gov.cn/"
+            target="_blank"
+            style="
+              white-space: nowrap;
+              text-decoration: none;
+              height: 20px;
+              line-height: 20px;
+              color: #939393;
+            "
+            >粤ICP备2021041290号-1</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,21 +91,31 @@ export default {
       // 这是登录表单的数据绑定对象
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: '123456',
       },
       // 表单的验证规则
       loginFormRules: {
         // 验证用户名格式
         username: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          {
+            min: 3,
+            max: 10,
+            message: '长度在 3 到 10 个字符',
+            trigger: 'blur',
+          },
         ],
         // 验证密码是否合法
         password: [
           { required: true, message: '请输入登录密码', trigger: 'blur' },
-          { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
-        ]
-      }
+          {
+            min: 6,
+            max: 16,
+            message: '长度在 6 到 16 个字符',
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   methods: {
@@ -89,15 +143,15 @@ export default {
         // 2.通过编程式导航跳转到后台主页，路由地址是 /home
         this.$router.push('/home')
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="less" scoped>
 /* scoped为组件独占样式 */
 .login_container {
-  background-color: #2b4b6b;
+  background-color: #ddeeff;
   height: 100%;
 }
 
@@ -142,5 +196,26 @@ export default {
 .btns {
   display: flex; //弹性盒模型
   justify-content: flex-end; //容器结尾对齐（右对齐）
+}
+
+.footer {
+  position: absolute;
+  bottom: 0%;
+  background-color: #dedede;
+  width: 100%;
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .icp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #dedede;
+      padding-bottom: 4px;
+      height: 63.8px;
+    }
+  }
 }
 </style>
